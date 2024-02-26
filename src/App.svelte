@@ -4,7 +4,7 @@
   import Settings from "./lib/Settings.svelte";
   import ThemeSelector from "./lib/ThemeSelector.svelte";
   import { Field, Game, Mode, newBoard, Outcome } from "./logic/game";
-  import type { Theme } from "./logic/theme";
+  import { Theme } from "./logic/theme";
 
   let board: Field[] = newBoard();
 

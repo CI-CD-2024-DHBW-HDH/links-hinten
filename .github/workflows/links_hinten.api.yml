@@ -3,15 +3,22 @@ name: MailOrganizer Api Build
 on:
   push:
     branches: [ "main" ]
- 
+  pull_request:
+    branches:
+      - "main"
 jobs:
   build-worker:
     runs-on: ubuntu-latest
     steps:
     - name: checkout repo code
       uses: actions/checkout@v3
-    - name: npm install 
+    - name: npm install
       run: npm install
-    - name: lint run
+    - name: format check
+      run: npm run format:check
+    - name: lint
       run: npm run lint
-    - run: npm run build
+    - name: build
+      run: npm run build
+    - name: test
+      run: npm test
