@@ -22,3 +22,8 @@ jobs:
       run: npm run build
     - name: test
       run: npm test
+    - name: Deploy 🚀
+      if: github.event_name != 'pull_request'
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: build # The folder the action should deploy.
