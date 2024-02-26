@@ -1,4 +1,4 @@
-name: MailOrganizer Api Build
+name: links_hinten
 
 on:
   push:
