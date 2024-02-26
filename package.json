@@ -11,8 +11,8 @@
     "test": "jest",
     "format": "prettier --plugin prettier-plugin-svelte --write ./src/**/*.{svelte,ts}",
     "format:check": "prettier -c --plugin prettier-plugin-svelte ./src/**/*.{svelte,ts}",
-    "lint": "eslint './src/**/*.{ts,svelte}'",
-    "lint:fix": "eslint --fix './src/**/*.{ts,svelte}'"
+    "lint": "eslint --plugin eslint-plugin-svelte ./src/**/*.{ts,svelte}",
+    "lint:fix": "eslint --plugin eslint-plugin-svelte --fix ./src/**/*.{ts,svelte}"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.0.2",
