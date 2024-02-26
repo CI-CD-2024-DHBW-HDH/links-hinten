@@ -8,9 +8,8 @@ jobs:
   build-worker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '18'
+    - name: checkout repo code
+      uses: actions/checkout@v2
     - name: npm install 
       run: npm install
     - run: npm run build
