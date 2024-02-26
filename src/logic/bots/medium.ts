@@ -53,7 +53,10 @@ export function pettyMove(board: Field[], own: Field): number {
     return opponentWinMove;
   } else {
     const blankFields = getBlanks(board);
-    const rndMove = randomMove(blankFields.length);
+    let rndMove = randomMove(blankFields.length);
+    while (board[rndMove] !== Field.EMPTY) {
+      rndMove = randomMove(blankFields.length);
+    }
     board[rndMove] = own;
     return rndMove;
   }
