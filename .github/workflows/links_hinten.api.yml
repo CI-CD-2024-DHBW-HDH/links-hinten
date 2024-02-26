@@ -1,0 +1,15 @@
+name: MailOrganizer Api Build
+
+on:
+  push:
+    branches: [ "main" ]
+ 
+jobs:
+  build-worker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    - run: npm ci
+    - run: npm run build
