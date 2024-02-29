@@ -19,8 +19,8 @@ jobs:
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
         registry: "ghcr.io" # ghcr.io
-        username: ${{ vars.actor }}
-        password: ${{ secrets.Docker_Pass }} # wird automatisch generiert
+        username: ${{ vars.ACTOR }}
+        password: ${{ secrets.DOCKER_PASS }} # wird automatisch generiert
     - name: Build and push Docker image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
       with:
