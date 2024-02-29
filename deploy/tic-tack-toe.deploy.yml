@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: tic-tack-toe
+  labels:
+    app: tic-tack-toe
+
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: tic-tack-toe
+  template:
+    metadata:
+      labels:
+        app: tic-tack-toe
+
+    spec:
+      containers:
+        - name: tic-tack-toe
+          image: ghcr.io/ci-cd-2024-dhbw-hdh/links-hinten:main
+          ports:
+            - name: web
+              containerPort: 80
+      imagePullSecrets:
+      - name: regcred # TODO fix
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tic-tack-toe
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: tic-tack-toe
