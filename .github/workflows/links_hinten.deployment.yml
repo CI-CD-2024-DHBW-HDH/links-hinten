@@ -24,3 +24,4 @@ jobs:
       uses: actions-hub/kubectl@master
       with:
         args: rollout status deployment/tic-tack-toe
+        
