@@ -46,7 +46,7 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: my-deployment
+    app: tic-tac-toe
   sessionAffinity: None
   type: NodePort
 status:
