@@ -10,17 +10,30 @@ jobs:
     steps:
     - name: Checkout main
       uses: actions/checkout@v2
-    - uses: actions-hub/kubectl@master
+    - name: Set up kubectl
+      uses: actions-hub/kubectl@master
       env:
         KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
       with:
         args: get pods
-    #- name: set secret
-    #  run: doctl kubectl create secret docker-registry regcred --docker-server=${{ env.REGISTRY }} --docker-username=${{ github.actor }} --docker-password=${{ secrets.GITHUB_TOKEN }}
-    - name: deploy
-      uses: actions-hub/kubectl@master
+
+    - name: Deploy
+      uses: Azure/k8s-deploy@v4
       with:
-        args: apply -f deploy/tic-tac-toe.deploy.yml
+        namespace: 'links-hinten'
+        manifests: |
+            deploy/tic-tac-toe.deploy.yaml
+        images: 'ghcr.io/ci-cd-2024-dhbw-hdh/links-hinten:main'
+    
+    - name: Set imagePullSecret
+      uses: azure/k8s-create-secret@v4
+      with:
+        namespace: 'gruppe-gaming'
+        secret-name: 'regcred'
+        container-registry-url: 'ghcr.io'
+        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+      id: create-secret
 
     - name: Verify deployment
       uses: actions-hub/kubectl@master
