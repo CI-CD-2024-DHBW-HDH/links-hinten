@@ -18,7 +18,7 @@ jobs:
     - name: deploy
       uses: actions-hub/kubectl@master
       with:
-        args: apply -f ${{ github.workspace }}/deploy/tic-tac-toe.deploy.yml
+        args: apply -f deploy/tic-tac-toe.deploy.yml
 
     - name: Verify deployment
       uses: actions-hub/kubectl@master
