@@ -1,0 +1,23 @@
+name: links_hinten_deploy
+
+on:
+  deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout main
+      uses: actions/checkout@v2
+    - name: install
+      uses: digitalocan/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    - name: Save DigitalOcean kubeconfig
+      run: doctl kubernetes cluster kubeconfig save testing-cluster
+    #- name: set secret
+    #  run: doctl kubectl create secret docker-registry regcred --docker-server=${{ env.REGISTRY }} --docker-username=${{ github.actor }} --docker-password=${{ secrets.GITHUB_TOKEN }}
+    - name: deploy
+      run: doctl kubectl apply -f $GITHUB_WORKSPACE/deploy/tic-tack-toe.deploy.yml
+    - name: Verify deployment
+      run: kubectl rollout status deployment/tic-tack-toe
