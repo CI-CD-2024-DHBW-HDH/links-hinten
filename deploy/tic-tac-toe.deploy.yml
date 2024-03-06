@@ -1,23 +1,23 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: tic-tack-toe
+  name: tic-tac-toe
   labels:
-    app: tic-tack-toe
+    app: tic-tac-toe
 
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: tic-tack-toe
+      app: tic-tac-toe
   template:
     metadata:
       labels:
-        app: tic-tack-toe
+        app: tic-tac-toe
 
     spec:
       containers:
-        - name: tic-tack-toe
+        - name: tic-tac-toe
           image: ghcr.io/ci-cd-2024-dhbw-hdh/links-hinten:main
           ports:
             - name: web
@@ -28,10 +28,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tic-tack-toe
+  name: tic-tac-toe
 spec:
   ports:
     - port: 80
       targetPort: 8080
   selector:
-    app: tic-tack-toe
+    app: tic-tac-toe
