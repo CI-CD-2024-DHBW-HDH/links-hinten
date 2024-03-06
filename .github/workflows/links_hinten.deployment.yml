@@ -18,13 +18,7 @@ jobs:
     - name: Create namespace
       run: kubectl create namespace links-hinten --dry-run=client -o yaml | kubectl apply -f -
 
-    - name: Deploy
-      uses: Azure/k8s-deploy@v4
-      with:
-        namespace: 'links-hinten'
-        manifests: |
-          deploy/tic-tac-toe.deploy.yml
-        images: 'ghcr.io/ci-cd-2024-dhbw-hdh/links-hinten:main'
+
     
     - name: Set imagePullSecret
       uses: azure/k8s-create-secret@v4
@@ -36,7 +30,11 @@ jobs:
         container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
       id: create-secret
 
-    - name: Verify deployment
-      uses: actions-hub/kubectl@master
+    - name: Deploy
+      uses: Azure/k8s-deploy@v4
       with:
-        args: rollout status deployment/tic-tac-toe
+        namespace: 'links-hinten'
+        manifests: |
+          deploy/tic-tac-toe.deploy.yml
+        images: 'ghcr.io/ci-cd-2024-dhbw-hdh/links-hinten:main'
+
