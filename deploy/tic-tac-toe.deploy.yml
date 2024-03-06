@@ -6,7 +6,7 @@ metadata:
     app: tic-tac-toe
 
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: tic-tac-toe
@@ -22,19 +22,33 @@ spec:
           ports:
             - name: web
               containerPort: 80
+              protocol: TCP
       imagePullSecrets:
       - name: regcred # TODO fix
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: tic-tac-toe
   name: tic-tac-toe
 spec:
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
   ports:
-    - port: 8080
-      targetPort: 80
+  - name: 8080-80
+    port: 8080
+    protocol: TCP
+    targetPort: 80
   selector:
-    app: tic-tac-toe
+    app: my-deployment
+  sessionAffinity: None
   type: NodePort
-
+status:
+  loadBalancer: {}
 
