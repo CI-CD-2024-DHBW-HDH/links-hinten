@@ -21,7 +21,7 @@ spec:
           image: ghcr.io/ci-cd-2024-dhbw-hdh/links-hinten:main
           ports:
             - name: web
-              containerPort: 8080
+              containerPort: 80
       imagePullSecrets:
       - name: regcred # TODO fix
 ---
@@ -32,9 +32,9 @@ metadata:
 spec:
   ports:
     - port: 8080
-      targetPort: 8080
+      targetPort: 80
   selector:
     app: tic-tac-toe
   type: NodePort
----
+
 
