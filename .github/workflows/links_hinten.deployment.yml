@@ -22,7 +22,7 @@ jobs:
       with:
         namespace: 'links-hinten'
         manifests: |
-            deploy/tic-tac-toe.deploy.yaml
+          deploy/tic-tac-toe.deploy.yml
         images: 'ghcr.io/ci-cd-2024-dhbw-hdh/links-hinten:main'
     
     - name: Set imagePullSecret
