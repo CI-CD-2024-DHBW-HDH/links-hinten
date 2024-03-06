@@ -1,7 +1,8 @@
 name: links_hinten_deploy
 
 on:
-  deployment
+    push:
+        branches: [ "main" ]
 
 jobs:
   deploy:
